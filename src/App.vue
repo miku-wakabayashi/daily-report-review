@@ -1,9 +1,9 @@
 <template>
   <div class="display-wrapper">
     <div class="-container">
-      <h2>日報レビュー担当を割り振ります</h2>
+      <h2>レビュー担当を割り振りるんだなも</h2>
       <div class="-select-number">
-        <h3 class="-select-number-title">人数を選択するんだなも</h3>
+        <h3 class="-select-number-title">レビュアーの人数を選択するんだなも</h3>
         <el-select v-model="reviewersNumber" class="-el-select-number">
           <el-option
             v-for="reviewer in reviewers"
