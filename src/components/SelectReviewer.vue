@@ -29,3 +29,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.el-select {
+  width: 200px;
+  margin-bottom: 8px;
+}
+</style>
