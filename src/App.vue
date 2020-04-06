@@ -53,7 +53,16 @@ export default {
   },
   data() {
     return {
-      reviewers: [
+      reviewersNumber: 0,
+      todayReviewers: [],
+      pairs: [],
+      buttonDisabled: true,
+      showResult: false
+    }
+  },
+  computed: {
+    reviewers() {
+      return [
         {
           id: 1,
           name: '安西 巧'
@@ -110,13 +119,10 @@ export default {
           id: 14,
           name: '若林 美紅'
         },
-      ],
-      reviewersNumber: 0,
-      todayReviewers: [''],
-      reviewees: ['石田 雄仁', '上野 奈於', '岡崎 悠', '岡田 真夏斗', '小澤 洸太', '梶 尚洋', '河岡 真愛', '岸田 芽依', '工藤 泰斗', '斉藤 はるか', '坂元 友里乃', '佐藤 暖', '下原口 莉貴', '須田 瑞季', '関口 佳那', '多岐 正行', '竹崎 岳人', '羽田野 裕人', '早志 栄亮', '林 尚也', '廣嶋 美甫', '福飯 雄太', '松縄 竜弥', '籾山瑞希','山岡 敬汰'],
-      pairs: [],
-      buttonDisabled: true,
-      showResult: false
+      ]
+    },
+    reviewees() {
+      return ['石田 雄仁', '上野 奈於', '岡崎 悠', '岡田 真夏斗', '小澤 洸太', '梶 尚洋', '河岡 真愛', '岸田 芽依', '工藤 泰斗', '斉藤 はるか', '坂元 友里乃', '佐藤 暖', '下原口 莉貴', '須田 瑞季', '関口 佳那', '多岐 正行', '竹崎 岳人', '羽田野 裕人', '早志 栄亮', '林 尚也', '廣嶋 美甫', '福飯 雄太', '松縄 竜弥', '籾山 瑞希','山岡 敬汰']
     }
   },
   watch: {
@@ -135,7 +141,7 @@ export default {
   },
   methods: {
     reviewerSelectedEvent(name, n) {
-      this.todayReviewers[n-1] = name
+      this.todayReviewers.splice(n-1, 1, name)
       this.checkReviewerSecected()
     },
     // ランダムで誰に割り振るかを決める
