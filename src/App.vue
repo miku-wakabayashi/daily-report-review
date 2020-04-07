@@ -193,7 +193,11 @@ export default {
       this.doubleName = false; 
       for (let i = 0;  i < this.todayReviewers.length; i++) {
         let countName = 0;
+        if(this.todayReviewers[i] ==''){
+          continue;
+        }
         for(let s = 0; s < this.todayReviewers.length; s++){
+
           if(this.todayReviewers[i] == this.todayReviewers[s]){
             countName++;
             if(countName == 2){
