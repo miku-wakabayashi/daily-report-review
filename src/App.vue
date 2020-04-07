@@ -24,9 +24,12 @@
           </select-reviewer>
         </div>
       </div>
+      <div v-if="doubleName">
+        <p>※レビュアーが重複しています</p>
+      </div> 
       <el-button 
         @click="shuffleReviewees"
-        :disabled="buttonDisabled"
+        :disabled="buttonDisabled || doubleName"
         class="-shuffle-button"
       >
         レビュアーを確定
@@ -116,7 +119,8 @@ export default {
       reviewees: ['石田 雄仁', '上野 奈於', '岡崎 悠', '岡田 真夏斗', '小澤 洸太', '梶 尚洋', '河岡 真愛', '岸田 芽依', '工藤 泰斗', '斉藤 はるか', '坂元 友里乃', '佐藤 暖', '下原口 莉貴', '須田 瑞季', '関口 佳那', '多岐 正行', '竹崎 岳人', '羽田野 裕人', '早志 栄亮', '林 尚也', '廣嶋 美甫', '福飯 雄太', '松縄 竜弥', '籾山瑞希','山岡 敬汰'],
       pairs: [],
       buttonDisabled: true,
-      showResult: false
+      showResult: false,
+      doubleName: false
     }
   },
   watch: {
@@ -137,6 +141,7 @@ export default {
     reviewerSelectedEvent(name, n) {
       this.todayReviewers[n-1] = name
       this.checkReviewerSecected()
+      this.isDoubleName()
     },
     // ランダムで誰に割り振るかを決める
     shuffleReviewees() {
@@ -181,6 +186,22 @@ export default {
         this.buttonDisabled = true
       } else {
         this.buttonDisabled = false
+      }
+    },
+    // 同一レビュアーが選択されていないかチェック
+    isDoubleName() {  
+      this.doubleName = false; 
+      for (let i = 0;  i < this.todayReviewers.length; i++) {
+        let countName = 0;
+        for(let s = 0; s < this.todayReviewers.length; s++){
+          if(this.todayReviewers[i] == this.todayReviewers[s]){
+            countName++;
+            if(countName == 2){
+              this.doubleName = true;
+              break;
+            }
+          }
+        }
       }
     }
   }
